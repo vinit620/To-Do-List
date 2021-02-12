@@ -1,7 +1,11 @@
 const express = require('express');
+const bodyParser = require("body-parser")
 
 const app = express();
+
 app.set('view engine', 'ejs');
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended: true}));
 
 const tasks = [];
 
@@ -19,6 +23,13 @@ app.get("/", (req, res) => {
         "day": today.toLocaleDateString("en-US", options),
         "tasks": tasks
     });
+});
+
+
+app.post("/", (req, res) => {
+    const task = req.body.newTask;
+    tasks.push(task);
+    res.redirect("/");
 });
 
 

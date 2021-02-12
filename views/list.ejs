@@ -5,16 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
+
+    <!--    Custom style-->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-    <h1> <%= day %> </h1>
+    <div class="box" id="heading">
+        <h1> <%= day %> </h1>
+    </div>
 
-    <ul>
-        <% tasks.forEach(task => { %>
-            <li> <%= task %> </li>
-        <% }) %>
-    </ul>
+    <div class="box">
+
+            <% if (tasks.length === 0) { %>
+                <p class="item">No Task</p>
+            <% } %>
+            <% tasks.forEach(task => { %>
+                    <div class="item">
+                        <input type="checkbox">
+                        <p> <%= task %> </p>
+                    </div>
+            <% }) %>
+
+        <form class="item" action="/" method="post">
+            <input type="text" name="newTask" placeholder="New Task" autocomplete="off">
+            <button type="submit">+</button>
+        </form>
+
+    </div>
+
 </body>
 
 </html>
