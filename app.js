@@ -1,10 +1,24 @@
 const express = require('express');
 
 const app = express();
+app.set('view engine', 'ejs');
+
+const tasks = [];
 
 app.get("/", (req, res) => {
 
-    res.send("<h1>Hello, World!</h1>");
+    const today = new Date();
+
+    const options = {
+        weekday: "long",
+        day: "numeric",
+        month: "long"
+    }
+
+    res.render("list", {
+        "day": today.toLocaleDateString("en-US", options),
+        "tasks": tasks
+    });
 });
 
 
